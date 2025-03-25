@@ -1,3 +1,10 @@
+// Menu data structure
+var menuLinks = [
+    { text: 'about', href: '/about' },
+    { text: 'catalog', href: '/catalog' },
+    { text: 'orders', href: '/orders' },
+    { text: 'account', href: '/account' },
+  ];
 // PART 1: GETTING STARTED----------------
 // 1. Select and cache the <main> element in a variable named mainEl.
 // 2. Set the background color of mainEl to the value stored in the --main-bg CSS custom property.
@@ -20,3 +27,41 @@ mainE1.classList.add('flex-ctr');
 // 2. Set the height of the topMenuEl element to be 100%.
 // 3. Set the background color of topMenuEl to the value stored in the --top-menu-bg CSS custom property.
 // 4. Add a class of flex-around to topMenuEl.
+ 
+// Select and cache the <nav id="top-menu"> element in a variable named topMenuEl
+let topMenuEl = document.querySelector('#top-menu');
+
+// Set the height of the topMenuEl element to be 100%
+topMenuEl.style.height = '100%';
+
+// Set the background color of topMenuEl to the value stored in the --top-menu-bg CSS custom property
+topMenuEl.style.backgroundColor = 'var(--top-menu-bg)';
+
+// Add a class of flex-around to topMenuEl
+topMenuEl.classList.add('flex-around');
+
+
+// PART 3: ADDING MENU BUTTONS  -------------------------------------------
+// 1. Iterate over the entire menuLinks array and for each "link" object:
+// 2. Create an <a> element.
+// 3. On the new element, add an href attribute with its value set to the href property of the "link" object.
+// 4. Set the new element's content to the value of the text property of the "link" object.
+// 5. Append the new element to the topMenuEl element.
+
+
+  // Iterate over the menuLinks array
+  menuLinks.forEach((link) => {
+    console.log(link)
+    // Create a new <a> element
+    let newAnchor = document.createElement('a');
+    
+    // Set the href attribute to the link's href property
+    newAnchor.setAttribute('href', link.href);
+    
+    // Set the content of the <a> element to the link's text property
+    newAnchor.textContent = link.text;
+    
+    // Append the <a> element to the topMenuEl element
+    topMenuEl.appendChild(newAnchor);
+  });
+  
