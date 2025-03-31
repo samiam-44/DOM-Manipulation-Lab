@@ -1,10 +1,22 @@
 // Menu data structure
 var menuLinks = [
-    { text: 'about', href: '/about' },
-    { text: 'catalog', href: '/catalog' },
-    { text: 'orders', href: '/orders' },
-    { text: 'account', href: '/account' },
-  ];
+  {text: 'about', href: '/about'},
+  {text: 'catalog', href: '#', subLinks: [
+    {text: 'all', href: '/catalog/all'},
+    {text: 'top selling', href: '/catalog/top'},
+    {text: 'search', href: '/catalog/search'},
+  ]},
+  {text: 'orders', href: '#' , subLinks: [
+    {text: 'new', href: '/orders/new'},
+    {text: 'pending', href: '/orders/pending'},
+    {text: 'history', href: '/orders/history'},
+  ]},
+  {text: 'account', href: '#', subLinks: [
+    {text: 'profile', href: '/account/profile'},
+    {text: 'sign out', href: '/account/signout'},
+  ]},
+];
+  
 // PART 1: GETTING STARTED----------------
 // 1. Select and cache the <main> element in a variable named mainEl.
 // 2. Set the background color of mainEl to the value stored in the --main-bg CSS custom property.
@@ -65,9 +77,10 @@ topMenuEl.classList.add('flex-around');
     topMenuEl.appendChild(newAnchor);
   });
   
-  //DOM MANPULATION PART 2
+  //DOM MANPULATION PART 2------------------------------
 
-  // CREATING THE SUB MENU
+  // ----------CREATING THE SUB MENU
+
 
   // Step 1. Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
   let subMenuEl = document.getElementById('sub-menu');
@@ -80,4 +93,32 @@ subMenuEl.style.backgroundColor = 'var(--sub-menu-bg)';
 
 //Step 4. Add the class of flex-around to the subMenuEl element.
 subMenuEl.classList.add('flex-around');
+
+//Hide subMenu
+// Set the CSS position property of subMenuEl to the value of absolute.
+subMenuEl.style.position = 'absolute';
+
+//Set the CSS top property of subMenuEl to '0'
+subMenuEl.style.top = '0'
+
+//-------------------------ADDING MENU INTERACTION
+
+//Step 1. Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
+let topMenuLinks = topMenuEl.querySelectorAll('a');
+
+//Step 2. Attach a delegated 'click' event listener to topMenuEl.
+topMenuEl.addEventListener('click', function(event) {
+  // ---The first line of code of the event listener function should call the event object's preventDefault() method.
+  event.preventDefault();
+// ---The second line of code of the function should immediately return if the element clicked was not an <a> element.
+if (event.target.tagName !== 'A') {
+return;
+}
+// ---Log the content of the <a> to verify the handler is working
+console.log(event.target.textContent);
+})
+
+
+
+
 
