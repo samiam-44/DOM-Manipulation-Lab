@@ -126,15 +126,36 @@ return;
 topMenuLinks.forEach(function(link){
   link.classList.remove('active');
 });
+//log clicked links from menu links
+const clickedLinkObject = menuLinks.find(link => link.text === event.target.textContent)
 //Toggle the 'active' class on the clicked <a> element
 if (event.target.classList.contains('active')) {
   event.target.classList.remove('active');
+  subMenuEl.style.top = '0'; //Hide submenu if link is inactive
 } else {
   event.target.classList.add('active');
-}
+
 // //Log to verify handler is working
 // console.log(event.target.textContent);
+
+//--Part 5 ADDING SUBMENU INTERACTION--
+// Show submenu if if clicked link has sub links
+if (clickedLinkObject.subLinks) {
+  if (subMenuEl.style.top === '100%') {
+    subMenuEl.style.top = '0';
+  } else {
+    subMenuEl.style.top = '100%'
+  }
+} else {
+  subMenuEl.style.top = '0';
+}
+}
+
+console.log(event.target.textContent);
 });
+
+
+
 
 
 
