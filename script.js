@@ -106,6 +106,23 @@ subMenuEl.style.top = '0'
 //Step 1. Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
 let topMenuLinks = topMenuEl.querySelectorAll('a');
 
+//HELPER FUNCTION TO BUILD SUB MENU DYNAMICALLY
+function buildSubmenu(subLinks) {
+  //Clear current contents of sub menuEl
+  subMenuEl.innerHTML = '';
+  //Iterate over sublinks array
+  subLinks.forEach(function(link) {
+    //Create new a element
+    let newAnchor = document.createElement('a');
+    //Add the href attribute to a element
+    newAnchor.setAttribute('href', link.href);
+    //Set the content of the a element to the text of the link
+    newAnchor.textContent = link.text;
+    //Append the new a element to the subMenuEl
+    subMenuEl.appendChild(newAnchor);
+  });
+}
+
 //Step 2. Attach a delegated 'click' event listener to topMenuEl.
 topMenuEl.addEventListener('click', function(event) {
   // ---The first line of code of the event listener function should call the event object's preventDefault() method.
@@ -135,12 +152,14 @@ if (event.target.classList.contains('active')) {
 } else {
   event.target.classList.add('active');
 
+
 // //Log to verify handler is working
 // console.log(event.target.textContent);
 
 //--Part 5 ADDING SUBMENU INTERACTION--
 // Show submenu if if clicked link has sub links
 if (clickedLinkObject.subLinks) {
+  buildSubmenu(clickedLinkObject.subLinks)
   if (subMenuEl.style.top === '100%') {
     subMenuEl.style.top = '0';
   } else {
@@ -150,9 +169,11 @@ if (clickedLinkObject.subLinks) {
   subMenuEl.style.top = '0';
 }
 }
-
 console.log(event.target.textContent);
 });
+
+// HELPER FUNCTION TO FACILITATE MAKING THE SUBMENU DYNAMIC BASED ON THE CLICKED LINK ADDED ^^^
+
 
 
 
