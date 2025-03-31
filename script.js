@@ -65,3 +65,19 @@ topMenuEl.classList.add('flex-around');
     topMenuEl.appendChild(newAnchor);
   });
   
+  //DOM MANPULATION PART 2
+
+  // CREATING THE SUB MENU
+
+  // Step 1. Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
+  let subMenuEl = document.getElementById('sub-menu');
+
+  //Step 2. Set the height subMenuEl element to be "100%".
+  subMenuEl.style.height = "100%";
+
+  //Step 3. Set the background color of subMenuEl to the value stored in the --sub-menu-bg CSS custom property.
+subMenuEl.style.backgroundColor = 'var(--sub-menu-bg)';
+
+//Step 4. Add the class of flex-around to the subMenuEl element.
+subMenuEl.classList.add('flex-around');
+
