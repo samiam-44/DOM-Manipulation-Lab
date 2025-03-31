@@ -1,17 +1,17 @@
 // Menu data structure
 var menuLinks = [
-  {text: 'about', href: '/about'},
-  {text: 'catalog', href: '#', subLinks: [
-    {text: 'all', href: '/catalog/all'},
-    {text: 'top selling', href: '/catalog/top'},
-    {text: 'search', href: '/catalog/search'},
+  {text: 'About', href: '/about'},
+  {text: 'Catalog', href: '#', subLinks: [
+    {text: 'All', href: '/catalog/all'},
+    {text: 'Top selling', href: '/catalog/top'},
+    {text: 'Search', href: '/catalog/search'},
   ]},
-  {text: 'orders', href: '#' , subLinks: [
+  {text: 'Orders', href: '#' , subLinks: [
     {text: 'new', href: '/orders/new'},
     {text: 'pending', href: '/orders/pending'},
     {text: 'history', href: '/orders/history'},
   ]},
-  {text: 'account', href: '#', subLinks: [
+  {text: 'Account', href: '#', subLinks: [
     {text: 'profile', href: '/account/profile'},
     {text: 'sign out', href: '/account/signout'},
   ]},
@@ -132,47 +132,79 @@ if (event.target.tagName !== 'A') {
 return;
 }
 // // ---Log the content of the <a> to verify the handler is working
-// console.log(event.target.textContent);
+console.log(event.target.textContent);
 
-// Now that we have references to each of these links, and a registered event listener, we will want to add a toggled "active" state to each menu item, showing whether or not it is currently selected:
-//---- The event listener should add the active class to the <a> element that was clicked, unless it was already active, in which case it should remove it.
-// ----The event listener should remove the active class from each other <a> element in topMenuLinks - whether the active class exists or not.
-// >Hint: Removing a non-existent class from an element does not cause an error!
+subMenuEl.style.top = '0';
 
-// Remove the 'active' class from all <a> elements
-topMenuLinks.forEach(function(link){
+// Remove the 'active' class from each <a> element in topMenuLinks
+topMenuLinks.forEach(function(link) {
   link.classList.remove('active');
 });
-//log clicked links from menu links
-const clickedLinkObject = menuLinks.find(link => link.text === event.target.textContent)
-//Toggle the 'active' class on the clicked <a> element
-if (event.target.classList.contains('active')) {
-  event.target.classList.remove('active');
-  subMenuEl.style.top = '0'; //Hide submenu if link is inactive
-} else {
-  event.target.classList.add('active');
 
+// Update the contents of mainEl inside an <h1> with the content of the clicked <a>
+  mainE1.innerHTML = `<h1>${event.target.textContent}</h1>`;
 
-// //Log to verify handler is working
-// console.log(event.target.textContent);
+// Add 'active' class to the clicked <a> element
+event.target.classList.add('active');
 
-//--Part 5 ADDING SUBMENU INTERACTION--
-// Show submenu if if clicked link has sub links
+const clickedLinkObject = menuLinks.find(link => link.text === event.target.textContent);
+
+// Check if the clicked link has subLinks (submenu)
 if (clickedLinkObject.subLinks) {
-  buildSubmenu(clickedLinkObject.subLinks)
+  // Build the submenu dynamically
+  buildSubmenu(clickedLinkObject.subLinks);
+  // Toggle the submenu
   if (subMenuEl.style.top === '100%') {
     subMenuEl.style.top = '0';
   } else {
-    subMenuEl.style.top = '100%'
+    subMenuEl.style.top = '100%';
   }
 } else {
+  // Hide the submenu if no sublinks exist
   subMenuEl.style.top = '0';
 }
-}
-console.log(event.target.textContent);
 });
+// // Now that we have references to each of these links, and a registered event listener, we will want to add a toggled "active" state to each menu item, showing whether or not it is currently selected:
+// //---- The event listener should add the active class to the <a> element that was clicked, unless it was already active, in which case it should remove it.
+// // ----The event listener should remove the active class from each other <a> element in topMenuLinks - whether the active class exists or not.
+// // >Hint: Removing a non-existent class from an element does not cause an error!
 
-// HELPER FUNCTION TO FACILITATE MAKING THE SUBMENU DYNAMIC BASED ON THE CLICKED LINK ADDED ^^^
+// // Remove the 'active' class from all <a> elements
+// topMenuLinks.forEach(function(link){
+//   link.classList.remove('active');
+// });
+// //log clicked links from menu links
+// const clickedLinkObject = menuLinks.find(link => link.text === event.target.textContent)
+// //Toggle the 'active' class on the clicked <a> element
+// if (event.target.classList.contains('active')) {
+//   event.target.classList.remove('active');
+//   subMenuEl.style.top = '0'; //Hide submenu if link is inactive
+// } else {
+//   event.target.classList.add('active');
+
+
+// // //Log to verify handler is working
+// // console.log(event.target.textContent);
+
+// //--Part 5 ADDING SUBMENU INTERACTION--
+// // Show submenu if if clicked link has sub links
+// if (clickedLinkObject.subLinks) {
+//   buildSubmenu(clickedLinkObject.subLinks)
+//   if (subMenuEl.style.top === '100%') {
+//     subMenuEl.style.top = '0';
+//   } else {
+//     subMenuEl.style.top = '100%'
+//   }
+// } else {
+//   subMenuEl.style.top = '0';
+// }
+// }
+// console.log(event.target.textContent);
+// });
+
+// // HELPER FUNCTION TO FACILITATE MAKING THE SUBMENU DYNAMIC BASED ON THE CLICKED LINK ADDED ^^^
+
+
 
 
 
